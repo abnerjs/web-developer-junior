@@ -7,8 +7,24 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::orderBy('created_at', 'desc')->limit(5)->get();
         return view('posts/index', ['posts' => $posts]);
+    }
+
+    public function all()
+    {
+        $posts = Post::orderBy('created_at', 'desc')->get();
+        return view('posts/index', ['posts' => $posts]);
+    }
+
+    public function search()
+    {
+        $term = $this->request->getGet('q');
+        $posts = Post::where('title', 'like', "%$term%")
+            ->orWhere('description', 'like', "%$term%")
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return $this->response->setJSON($posts);
     }
 
     public function create()
@@ -27,7 +43,9 @@ class PostController extends Controller
         $image = $this->request->getFile('image');
         $imagePath = null;
         if ($image && $image->isValid()) {
-            $imagePath = $image->store('uploads');
+            $newName = $image->getRandomName();
+            $image->move(ROOTPATH . 'public/uploads', $newName);
+            $imagePath = '/uploads/' . $newName;
         }
         $data = [
             'title' => $this->request->getPost('title'),
@@ -50,8 +68,8 @@ class PostController extends Controller
         if (!session()->get('user_id')) {
             return redirect()->to('/users/login');
         }
-        $post = Post::find($id);
-        if ($post->user_id != session()->get('user_id')) {
+        $post = Post::where('id', $id)->first();
+        if (!$post || !isset($post->user_id) || $post->user_id != session()->get('user_id')) {
             return redirect()->to('/posts');
         }
         return view('posts/edit', ['post' => $post]);
@@ -62,13 +80,15 @@ class PostController extends Controller
         if (!session()->get('user_id')) {
             return redirect()->to('/users/login');
         }
-        $post = Post::find($id);
-        if ($post->user_id != session()->get('user_id')) {
+        $post = Post::where('id', $id)->first();
+        if (!$post || !isset($post->user_id) || $post->user_id != session()->get('user_id')) {
             return redirect()->to('/posts');
         }
         $image = $this->request->getFile('image');
         if ($image && $image->isValid()) {
-            $post->image = $image->store('uploads');
+            $newName = $image->getRandomName();
+            $image->move(ROOTPATH . 'public/uploads', $newName);
+            $post->image = '/uploads/' . $newName;
         }
         $post->title = $this->request->getPost('title');
         $post->description = $this->request->getPost('description');
@@ -81,10 +101,11 @@ class PostController extends Controller
         if (!session()->get('user_id')) {
             return redirect()->to('/users/login');
         }
-        $post = Post::find($id);
-        if ($post->user_id == session()->get('user_id')) {
+        $post = Post::where('id', $id)->first();
+        if ($post && isset($post->user_id) && $post->user_id == session()->get('user_id')) {
             $post->delete();
         }
         return redirect()->to('/posts');
     }
+
 }

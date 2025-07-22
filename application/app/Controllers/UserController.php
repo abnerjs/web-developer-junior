@@ -14,6 +14,7 @@ class UserController extends Controller
             $user = User::where('email', $email)->first();
             if ($user && password_verify($password, $user->password)) {
                 session()->set('user_id', $user->id);
+                session()->set('name', $user->name);
                 return redirect()->to('/users/profile');
             }
             return view('users/login', ['error' => 'Credenciais inválidas']);
@@ -63,6 +64,7 @@ class UserController extends Controller
     public function logout()
     {
         session()->remove('user_id');
-        return redirect()->to('/users/login');
+        session()->remove('name');
+        return redirect()->to('/');
     }
 }

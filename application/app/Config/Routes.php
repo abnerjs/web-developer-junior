@@ -18,6 +18,8 @@ $routes->get('posts/edit/(:num)', 'PostController::edit/$1');
 $routes->post('posts/update/(:num)', 'PostController::update/$1');
 $routes->get('posts/show/(:num)', 'PostController::show/$1');
 $routes->get('posts/delete/(:num)', 'PostController::delete/$1');
+$routes->get('posts/all', 'PostController::all');
+$routes->get('posts/search', 'PostController::search');
 
 // User Routes
 $routes->get('users/login', 'UserController::login');
