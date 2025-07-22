@@ -13,7 +13,7 @@ class App extends BaseConfig
     public string $permittedURIChars = 'a-z 0-9~%.:_\-';
     public string $defaultLocale = 'pt-br';
     public bool $negotiateLocale = false;
-    public array $supportedLocales = ['pt-br'];
+    public array $supportedLocales = ['pt-br, en-us'];
     public string $appTimezone = 'America/Sao_Paulo';
     public string $charset = 'UTF-8';
     public bool $forceGlobalSecureRequests = false;

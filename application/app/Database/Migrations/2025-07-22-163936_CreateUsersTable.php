@@ -15,7 +15,7 @@ class CreateUsersTable extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
-            'username' => [
+            'name' => [
                 'type'       => 'VARCHAR',
                 'constraint' => '100',
             ],
@@ -29,7 +29,7 @@ class CreateUsersTable extends Migration
                 'constraint' => '255',
             ],
             'created_at datetime default current_timestamp',
-            'updated_at datetime default current_timestamp on update current_timestamp',
+            'email_verified_at datetime default null',
         ]);
         $this->forge->addPrimaryKey('id');
         $this->forge->createTable('users');
