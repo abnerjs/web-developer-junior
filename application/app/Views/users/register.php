@@ -8,4 +8,7 @@
     <input type="password" name="password" required>
     <button type="submit">Cadastrar</button>
 </form>
+<?php if (!empty($error)): ?>
+    <p style="color:red;">Erro: <?= htmlspecialchars($error) ?></p>
+<?php endif; ?>
 <p>Já tem uma conta? <a href="/users/login">Faça login</a></p>

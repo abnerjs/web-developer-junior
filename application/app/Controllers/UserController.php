@@ -7,7 +7,7 @@ class UserController extends Controller
 {
     public function login()
     {
-        if ($this->request->getMethod() === 'post') {
+        if ($this->request->getMethod() === 'POST') {
             $email = $this->request->getPost('email');
             $password = $this->request->getPost('password');
 
@@ -23,16 +23,31 @@ class UserController extends Controller
 
     public function register()
     {
-        if ($this->request->getMethod() === 'post') {
-            $data = [
-                'name' => $this->request->getPost('name'),
-                'email' => $this->request->getPost('email'),
-                'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
-            ];
-            User::create($data);
-            return redirect()->to('/users/login');
+        $error = null;
+        if ($this->request->getMethod() === 'POST') {
+            $email = $this->request->getPost('email');
+            $existingUser = User::where('email', $email)->first();
+            if ($existingUser) {
+                $error = 'Este e-mail já está cadastrado.';
+            } else {
+                try {
+                    $data = [
+                        'name' => $this->request->getPost('name'),
+                        'email' => $email,
+                        'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
+                    ];
+
+                    User::create($data);
+                    return redirect()->to('/users/login');
+                } catch (\Exception $e) {
+                    $error = 'Erro ao cadastrar usuário: ' . $e->getMessage();
+                    log_message('error', $error);
+                    var_dump($error);
+                    exit;
+                }
+            }
         }
-        return view('users/register');
+        return view('users/register', ['error' => $error]);
     }
 
     public function profile()

@@ -6,3 +6,4 @@
     <input type="password" name="password" required>
     <button type="submit">Entrar</button>
 </form>
+<p>Não tem uma conta? <a href="/users/register">Faça registro</a></p>

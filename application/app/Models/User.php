@@ -9,6 +9,7 @@ class User extends Model
     protected $hidden = ['password'];
     protected $casts = [
         'created_at' => 'datetime',
+        'updated_at' => 'datetime',
         'email_verified_at' => 'datetime',
     ];
 
