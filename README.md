@@ -1,28 +1,32 @@
 # web-developer-junior
 Projeto para avaliação técnica da Vaga para Desenvolvedor Web Júnior
 
-## tecnologias
-- utilizando codeigniter 4
-- eloquent como ORM
-- bootstrap como template e jquery para comportamentos 
-- Banco de dados MySQL
-- e versionamento com Git
+## Stack
+- CodeIgniter 4
+- Eloquent ORM
+- Bootstrap template (Utilizando tailwind para estilizações majoritárias)
+- JQuery
+- MySQL via Docker
+- Git
 
-## atividade 1
-- crie um gerenciador de posts de um blog
-- o gerenciador deve possuir login
-- o post deve possui nome, foto, descrição em html
-- projeto deve ser monolítico ou seja, não separar em front e back
+## Atividade 1
+- [X] crie um gerenciador de posts de um blog
+- [X] o gerenciador deve possuir login
+- [X] o post deve possui nome, foto, descrição em html
+- [X] projeto deve ser monolítico ou seja, não separar em front e back
 
-## atividade 2
-- agora crie o blog
-- deve possuir uma tela de listagem dos posts com campo de buscar
-- e outra tela de destalhes do post
+## Atividade 2
+- [X] agora crie o blog
+- [X] deve possuir uma tela de listagem dos posts com campo de buscar
+- [x] e outra tela de destalhes do post
 
-## informações
-- o banco MySQL precisa ter seu diagrama, pode usar workbench pra isso
+## Informações
 - será avaliado a qualidade do código escrito
 - bem como sua capacidade de utilizar as tecnologias propostas.
-- faça um fork desse projeto
-- crie uma branch development e depois de terminar o desenvolvimento faça o merge com a main
-- depois envie o link do respositorio para vagastmatheaco@gmail.com
+- [x] o banco MySQL precisa ter seu diagrama, pode usar workbench pra isso
+- [x] faça um fork desse projeto
+- [x] crie uma branch development e depois de terminar o desenvolvimento faça o merge com a main
+- [x] depois envie o link do respositorio para vagastmatheaco@gmail.com
+
+## Diagrama
+![Diagrama do Banco de Dados](./docs/diagram.png)
