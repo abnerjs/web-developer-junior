@@ -15,9 +15,11 @@ class PostController extends Controller
     {
         $search = $this->request->getGet('search');
         if ($search) {
-            $posts = Post::where('title', 'LIKE', "%{$search}%")
-                ->orWhere("description", "LIKE", "%{$search}%")
-                ->orderBy("created_at", "desc")
+            $posts = Post::whereAny([
+                'title',
+                'description',
+            ], 'like', "%{$search}%")
+                ->orderBy('created_at')
                 ->get();
         } else {
             $posts = Post::orderBy('created_at', 'desc')->get();
