@@ -14,9 +14,10 @@
 
   <nav class="navbar navbar-expand-lg navbar-light m-4">
     <div class="container-fluid">
-      <a class="navbar-brand fw-bold" href="/">BLOG MVP</a>
-      <form class="d-flex" id="searchForm">
-        <input class="form-control me-2" type="search" placeholder="Buscar posts" aria-label="Buscar" id="searchInput">
+      <a class="navbar-brand fw-bold" href="/">Teste Vaga</a>
+      <form class="d-flex" id="searchForm" action="<?= base_url('posts/all') ?>" method="get">
+        <input class="form-control me-2" type="search" placeholder="Buscar posts" aria-label="Buscar" id="searchInput"
+          name="search" value="<?= isset($_GET['search']) ? esc($_GET['search']) : '' ?>">
         <button class="btn btn-outline-success" type="submit">Buscar</button>
       </form>
       <div id="userArea" class="ms-3">
