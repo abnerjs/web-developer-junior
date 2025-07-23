@@ -12,7 +12,10 @@
       <label class="form-label fw-bold">Email:</label>
       <div class="form-control bg-light"><?= $user->email ?></div>
     </div>
-    <a href="/users/logout" class="btn btn-outline-danger w-100">Sair</a>
+    <div class="d-flex">
+      <a href="/" class="btn btn-outline-secondary me-2 w-100">Voltar</a>
+      <a href="/users/logout" class="btn btn-danger w-100">Sair</a>
+    </div>
   </div>
 </div>
 <?= $this->endSection() ?>
