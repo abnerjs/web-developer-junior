@@ -13,7 +13,15 @@ class PostController extends Controller
 
     public function all()
     {
-        $posts = Post::orderBy('created_at', 'desc')->get();
+        $search = $this->request->getGet('search');
+        if ($search) {
+            $posts = Post::where('title', 'LIKE', "%{$search}%")
+                ->orWhere("description", "LIKE", "%{$search}%")
+                ->orderBy("created_at", "desc")
+                ->get();
+        } else {
+            $posts = Post::orderBy('created_at', 'desc')->get();
+        }
         return view('posts/index', ['posts' => $posts]);
     }
 

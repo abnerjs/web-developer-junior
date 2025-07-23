@@ -5,8 +5,8 @@
 <div class="mx-4">
   <div class="d-flex justify-content-between align-items-center mb-4">
     <div class="d-flex">
-      <h1 class="display-12 fw-bolder"><?= ($_SERVER['REQUEST_URI'] === '/posts/all') ? 'Todas as notícias' : 'Últimas Notícias' ?></h1>
-      <?php if ($_SERVER['REQUEST_URI'] !== '/posts/all'): ?>
+      <h1 class="display-12 fw-bolder"><?= (strpos($_SERVER['REQUEST_URI'], '/posts/all') === 0) ? 'Todas as notícias' : 'Últimas Notícias' ?></h1>
+      <?php if (strpos($_SERVER['REQUEST_URI'], '/posts/all') === 0): ?>
         <a href="/posts/all"
           class="btn ms-2 d-flex justify-content-between align-items-center gap-1 !text-xs !text-zinc-400 hover:!text-zinc-600"><i>Ver todos os posts</i>
           <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16 16">
@@ -29,7 +29,7 @@
     <?php endif; ?>
   </div>
   <div class="row g-2" id="bentoPosts">
-    <?php if ($_SERVER['REQUEST_URI'] === '/posts/all'): ?>
+    <?php if (strpos($_SERVER['REQUEST_URI'], '/posts/all') === 0): ?>
     <div class="d-flex flex-column gap-4 container px-5 w-50" id="bentoPosts">
       <?php foreach ($posts as $post): ?>
         <div class="card shadow-sm !rounded-xl !border-none overflow-hidden w-100 min-h-48">
